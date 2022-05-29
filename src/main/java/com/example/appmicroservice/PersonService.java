@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -21,5 +22,10 @@ public class PersonService {
     public List<Person> findByAll(){
         logger.info("FindAll service ________________________________________________");
         return repository.findAll();
+    }
+    public Person findByNameAndId(String name, Long id){
+        Optional<Person> person = repository.findByNameAndId(name, id);
+        return person.isPresent() ? person.get(): new Person();
+
     }
 }
